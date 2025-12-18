@@ -10,9 +10,13 @@ import {Server} from 'socket.io'
 const app = express()
 const server = http.createServer(app);
 
-export const io = new Server(server,{
-    cors:{origin:"*"}
-})
+export const io = new Server(server, {
+  cors: {
+    origin: true,
+    credentials: true,
+  },
+});
+
 
 export const userSocketMap = {} //{ userId: socketId }
 
@@ -30,9 +34,13 @@ io.on("connection",(socket)=>{
     
 })
 
-app.use(cors({
-    origin: '*'
-}))
+app.use(
+  cors({
+    origin: true, // reflect request origin
+    credentials: true,
+  })
+);
+
 app.use(express.json({limit:"4mb"}))
 
 app.use("/api/status",(req,res)=>{
