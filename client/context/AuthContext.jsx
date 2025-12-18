@@ -75,10 +75,11 @@ export const AuthProvider = ({children}) =>{
 
     const connectSocket = (userData) =>{
         if(!userData || socket?.connected)return;
-        const newsocket = io(backendUrl,{
-            query:{
-                userId:userData._id
-            }
+        const newsocket = io(backendUrl, {
+          query: {
+            userId: userData._id,
+          },
+          transports: ["websocket"],
         });
         newsocket.connect();
         setSocket(newsocket);
