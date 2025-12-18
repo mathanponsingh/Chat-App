@@ -11,10 +11,7 @@ const app = express()
 const server = http.createServer(app);
 
 export const io = new Server(server, {
-  cors: {
-    origin: true,
-    credentials: true,
-  },
+  cors: {origin:"*"},
 });
 
 
@@ -34,12 +31,7 @@ io.on("connection",(socket)=>{
     
 })
 
-app.use(
-  cors({
-    origin: true, // reflect request origin
-    credentials: true,
-  })
-);
+app.use(cors());
 
 app.use(express.json({limit:"4mb"}))
 
